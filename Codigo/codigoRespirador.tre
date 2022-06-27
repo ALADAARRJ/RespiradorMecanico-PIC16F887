@@ -1,0 +1,128 @@
+ÀÄcodigoRespirador
+   ÃÄMAIN  1/1740  Ram=1
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄ@GETCH_BIU_1  0/27  Ram=2
+   ³  ÃÄlcd_init  0/51  Ram=2
+   ³  ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ³  ÃÄlcd_send_nibble  0/11  Ram=1
+   ³  ³  ÃÄlcd_send_nibble  0/11  Ram=1
+   ³  ³  ÃÄ@const627  0/8  Ram=0
+   ³  ³  ÀÄlcd_send_byte  0/57  Ram=3
+   ³  ³     ÃÄlcd_read_byte  (Inline)  Ram=3
+   ³  ³     ÃÄlcd_send_nibble  0/11  Ram=1
+   ³  ³     ÀÄlcd_send_nibble  0/11  Ram=1
+   ³  ÃÄ@ITOF  0/29  Ram=2
+   ³  ÃÄ@DIVFF  0/202  Ram=14
+   ³  ÃÄ@ADDFF  0/321  Ram=16
+   ³  ÃÄ@PSTRINGC7_648  0/86  Ram=4
+   ³  ³  ÃÄlcd_putc  0/55  Ram=1
+   ³  ³  ³  ÃÄlcd_send_byte  0/57  Ram=3
+   ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ÃÄlcd_gotoxy  (Inline)  Ram=4
+   ³  ³  ³  ³  ÀÄlcd_send_byte  0/57  Ram=3
+   ³  ³  ³  ³     ÀÄ*
+   ³  ³  ³  ÃÄlcd_send_byte  0/57  Ram=3
+   ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ÀÄlcd_send_byte  0/57  Ram=3
+   ³  ³  ³     ÀÄ*
+   ³  ³  ÀÄlcd_putc  0/55  Ram=1
+   ³  ³     ÀÄ*
+   ³  ÃÄ@PSTRINGCN7_648  0/87  Ram=5
+   ³  ³  ÃÄlcd_putc  0/55  Ram=1
+   ³  ³  ³  ÀÄ*
+   ³  ³  ÀÄlcd_putc  0/55  Ram=1
+   ³  ³     ÀÄ*
+   ³  ÃÄ@PRINTF_L32D_648FPFPF  0/195  Ram=13
+   ³  ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ³  ÃÄ@FTOSD  0/31  Ram=5
+   ³  ³  ÃÄ@DIV3232  0/79  Ram=13
+   ³  ³  ÃÄlcd_putc  0/55  Ram=1
+   ³  ³  ³  ÀÄ*
+   ³  ³  ÃÄlcd_putc  0/55  Ram=1
+   ³  ³  ³  ÀÄ*
+   ³  ³  ÃÄlcd_putc  0/55  Ram=1
+   ³  ³  ³  ÀÄ*
+   ³  ³  ÃÄlcd_putc  0/55  Ram=1
+   ³  ³  ³  ÀÄ*
+   ³  ³  ÀÄ@DIV3232  0/79  Ram=13
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@PRINTF_LU_9600_62_63  0/89  Ram=9
+   ³  ÃÄ@PRINTF_L32D_9600_62_63FPFPF  0/199  Ram=13
+   ³  ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ³  ÃÄ@FTOSD  0/31  Ram=5
+   ³  ³  ÃÄ@DIV3232  0/79  Ram=13
+   ³  ³  ÀÄ@DIV3232  0/79  Ram=13
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@ITOF  0/29  Ram=2
+   ³  ÃÄ@DIVFF  0/202  Ram=14
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÃÄ@ITOF  0/29  Ram=2
+   ³  ÃÄ@DIVFF  0/202  Ram=14
+   ³  ÃÄ@ADDFF  0/321  Ram=16
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÃÄmostrar_variable  0/1  Ram=1
+   ³  ÃÄ@GETCH_BIU_1  0/27  Ram=2
+   ³  ÃÄlcd_init  0/51  Ram=2
+   ³  ³  ÀÄ*
+   ³  ÃÄ@ITOF  0/29  Ram=2
+   ³  ÃÄ@DIVFF  0/202  Ram=14
+   ³  ÃÄ@ADDFF  0/321  Ram=16
+   ³  ÃÄ@PSTRINGC7_648  0/86  Ram=4
+   ³  ³  ÀÄ*
+   ³  ÃÄ@PSTRINGCN7_648  0/87  Ram=5
+   ³  ³  ÀÄ*
+   ³  ÃÄ@PRINTF_L32D_648FPFPF  0/195  Ram=13
+   ³  ³  ÀÄ*
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@PRINTF_LU_9600_62_63  0/89  Ram=9
+   ³  ÃÄ@PRINTF_L32D_9600_62_63FPFPF  0/199  Ram=13
+   ³  ³  ÀÄ*
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@delay_ms1  0/14  Ram=1
+   ³  ÃÄ@ITOF  0/29  Ram=2
+   ³  ÃÄ@DIVFF  0/202  Ram=14
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÃÄ@ITOF  0/29  Ram=2
+   ³  ÃÄ@DIVFF  0/202  Ram=14
+   ³  ÃÄ@ADDFF  0/321  Ram=16
+   ³  ÃÄ@SFTOI  0/31  Ram=4
+   ³  ÀÄmostrar_variable  0/1  Ram=1
+   ÃÄinttimer1_  0/16  Ram=0
+   ³  ÀÄsolo_mostrar_variable  (Inline)  Ram=0
+   ÀÄIntPortB4_7  0/116  Ram=1
+      ÀÄ@delay_ms1  0/14  Ram=1

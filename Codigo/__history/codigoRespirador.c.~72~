@@ -1,0 +1,187 @@
+//PROYECTO FINAL
+#include<16f887.h> 
+#fuses INTRC_IO,NOWDT,PUT,NOBROWNOUT
+#device ADC=8
+#use delay(INTERNAL=500000) //Configuracion del reloj.
+#include"lcd.h"
+#use RS232(baud=9600,xmit=PIN_C6,rcv=PIN_C7,timeout=100)
+//Configuracion de puertos
+#use fast_io(D)
+#use fast_io(E)
+
+int8 unidad=0;
+int8 decenas=0;
+int8 var_respiraciones=0;
+
+int16 var_adc=0;
+
+
+float seg_ondulacion=0;
+
+int16 pos=31;
+int16 t_subida=0;
+int16 t_bajada_meseta=0;
+int16 t_meseta=0;
+int16 t_bajada=0;
+int16 t_pausa=0;
+
+//byte const display7seg[10]= {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
+
+int1 f_emergencia=0;
+int1 f_stop=0;
+int1 f_inicio=0;
+int1 f_ventilar=0;
+//int1 f_flanco=0;
+
+void mostrar_variable(int8 var_sep);
+void solo_mostrar_variable(void);
+
+#INT_TIMER1
+void inttimer1_(){
+   solo_mostrar_variable();
+   output_toggle(PIN_C3);
+   set_timer1(59036);
+}
+
+#INT_RB
+void IntPortB4_7(){
+   if(!input(PIN_B4) && input(PIN_B5) && input(PIN_B7)){
+      f_inicio=1;
+   }
+   else if(!input(PIN_B5) && input(PIN_B4) && input(PIN_B7)){
+      reset_cpu();
+   }
+   else if(!input(PIN_B7) && input(PIN_B5) && input(PIN_B4)){
+      if(f_emergencia==0){
+         setup_ccp2(CCP_PWM);
+         int16 pwm_sonido=315;
+         set_pwm2_duty(pwm_sonido);
+         f_emergencia=1;
+      }
+      else{
+         f_emergencia=0;
+         setup_ccp1(CCP_OFF);
+         int16 pwm_sonido=0;
+         set_pwm2_duty(pwm_sonido);
+      }
+   }
+   delay_ms(200);
+}
+
+void main(){
+   set_tris_D(0x00);
+   set_tris_E(0x00);
+   
+   output_D(0);
+   
+   port_b_pullups(255);
+   
+   setup_adc(ADC_CLOCK_INTERNAL);
+   setup_adc_ports(sAN0);
+   set_adc_channel(0);
+   
+   setup_timer_2(T2_DIV_BY_16,155,1);
+   setup_ccp1(CCP_OFF);
+   setup_ccp2(CCP_OFF);
+   setup_timer_1(T1_DISABLED);
+   f_stop=1;
+   
+   disable_interrupts(INT_TIMER1);
+   enable_interrupts(INT_RB);
+   enable_interrupts(GLOBAL);
+   
+   
+   while(TRUE){
+      ///////////////////CODIGO LCD
+      int16 variable; //Declaramos variable entera que guarda lo que capture el ADC y la terminal virtual 
+      float voltaje; // Declaramos variables de punto flotante para el calculo de voltaje y angulo
+      float angulo;
+      lcd_init();  //Inicializamos el LCD
+      setup_adc_ports(sAN0); //Instruccion para configurar los pines como entradas analogicas
+      setup_adc(ADC_CLOCK_INTERNAL); //Utilizamos el reloj interno para generar una frecuencia de muestreo
+      variable=read_adc(); //Funcion que nos permite obtener el valor del ADC y terminal virtual  y retorna valor adimensional 
+      angulo = (float)variable*270/255;
+      voltaje = (float)variable*5/255; //Aplicamos regla de tres tanto para el angulo como voltaje y guardamos el valor entero de iAdc como un valor float      
+      printf(lcd_putc, "\fvoltaje %1.2f",voltaje);  //Agrgamos el valor de voltaje con un entero y dos de punto flotante
+      printf(lcd_putc, "\nangulo %3.2f",angulo);
+      delay_ms(100); 
+      printf("%Lu,%1.2f,%3.2f\n\r", variable, voltaje, angulo);
+
+      //////////////////FIN CODIGO LCD
+      if(f_ventilar==1){
+         pos=30;
+         while(pos<=47){
+            set_pwm1_duty(pos);
+            delay_ms(t_subida);
+            pos=pos+1;
+         }
+         pos=47;
+         while(pos<=42){
+            set_pwm1_duty(pos);
+            delay_ms(t_bajada_meseta);
+            pos=pos+1;
+         }
+         delay_ms(t_meseta);
+         pos=37;
+         set_pwm1_duty(pos);
+         
+         while(pos>=30){
+            set_pwm1_duty(pos);
+            delay_ms(t_bajada);
+            pos=pos-1;
+         }
+         delay_ms(t_pausa);
+      }
+      else if(f_inicio==1){
+         seg_ondulacion=60000.0/var_respiraciones;
+         t_subida=seg_ondulacion*0.0123529;
+         t_bajada_meseta=seg_ondulacion*0.016;
+         t_meseta=seg_ondulacion*0.14;
+         t_bajada=seg_ondulacion*0.0442857;
+         t_pausa=seg_ondulacion*0.26;
+         
+         f_ventilar=1;
+         f_inicio=0;
+         f_stop=0;
+         setup_ccp1(CCP_PWM);
+         set_pwm1_duty(pos);
+         
+         enable_interrupts(INT_TIMER1);
+         setup_timer_1(T1_INTERNAL|T1_DIV_BY_1);
+         set_timer1(53036);
+      }
+      else if(f_stop==1){
+         var_adc=read_adc();
+         var_respiraciones=12+var_adc/6.7105;
+         mostrar_variable(var_respiraciones);
+      }
+   }
+}
+
+
+void mostrar_variable(int8 var_sep){
+   /*unidad=0;
+   decenas=0;
+   
+   decenas=var_sep/10.0;
+   unidad=var_sep-decenas*10;
+   
+   output_E(0x01);
+   output_D(display7seg[unidad]);
+   delay_ms(50);
+   output_E(0x02);
+   output_D(display7seg[decenas]);*/
+}
+
+void solo_mostrar_variable(void){
+  /* if(f_flanco==1){
+   output_E(0x01);
+   output_D(display7seg[unidad]);
+   f_flanco=0;
+   }
+   else{
+   output_E(0x02);
+   output_D(display7seg[decenas]);
+   f_flanco=1;
+   }*/
+}

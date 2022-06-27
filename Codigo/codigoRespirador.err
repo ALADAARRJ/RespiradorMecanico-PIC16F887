@@ -1,0 +1,4 @@
+>>> Warning 216 "codigoRespirador.c" Line 279(1,2): Interrupts disabled during call to prevent re-entrancy:  (@delay_ms1)
+      Memory usage:   ROM=45%      RAM=13% - 22%
+      0 Errors,  1 Warnings.
+Build Successful.

@@ -1,0 +1,22 @@
+[PROJECT]
+Target=codigoRespirador.hex
+Processor_Text=PIC16F887
+CCSVersion=5.015
+Compiler=PCM
+[Target Data]
+FileList=codigoRespirador.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[codigoRespirador.c]
+Type=4
+[mru-list]
+1=codigoRespirador.c
+[Opened Files]
+1=codigoRespirador.c
+2=
+3=
+4=..\..\CIRCUITO 7\Ejercicio07.c
+5=
+[Units]
+Count=1
+1=codigoRespirador (main)
